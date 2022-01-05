@@ -9,15 +9,31 @@
     <div class="login_info">
       <input type="text" name="Login" placeholder="Email..." ref="email" />
       <input
+        type="text"
+        name="Username"
+        placeholder="Username..."
+        ref="username"
+      />
+      <input
         type="password"
         name="Password"
         placeholder="Password..."
         ref="password"
       />
-      <input type="text" name="bio" placeholder="Bio" ref="bio">
-      <input type="text" name="dob" placeholder="DOB 2000-01-10" ref="dob">
-      <input type="text" name="pfp" placeholder="Profile picture link (OPTIONAL)" ref="pfp">
-      <input type="text" name="banimg" placeholder="Banner Picture link (OPTIONAL)" ref="banimg">
+      <input type="text" name="bio" placeholder="Bio" ref="bio" />
+      <input type="text" name="dob" placeholder="DOB 2000-01-10" ref="dob" />
+      <input
+        type="text"
+        name="pfp"
+        placeholder="Profile picture link (OPTIONAL)"
+        ref="pfp"
+      />
+      <input
+        type="text"
+        name="banimg"
+        placeholder="Banner Picture link (OPTIONAL)"
+        ref="banimg"
+      />
       <button class="register_button" @click="axios_request">
         Complete Registration!
       </button>
@@ -27,7 +43,9 @@
 
 <script>
 import axios from "axios";
-axios.defaults.headers.common['X-Api-Key'] = 'G3QsyNUo9GBausjYx7y7RVO0ByWvoBcpmNxHmeaNjs2NN'
+import cookies from "vue-cookies";
+axios.defaults.headers.common["X-Api-Key"] =
+  "G3QsyNUo9GBausjYx7y7RVO0ByWvoBcpmNxHmeaNjs2NN";
 
 export default {
   name: "PageRegister",
@@ -40,11 +58,16 @@ export default {
           method: "POST",
           data: {
             email: this.$refs["email"].value,
+            username: this.$refs["username"].value,
             password: this.$refs["password"].value,
-            bio: this.$refs['bio'],
+            bio: this.$refs["bio"].value,
+            birthdate: this.$refs["dob"].value,
+            imageUrl: this.$refs["pfp"].value,
+            bannerUrl: this.$refs["banimg"].value,
           },
         })
         .then((response) => {
+          cookies.set("user", response.data);
           response;
         })
         .catch((error) => {
