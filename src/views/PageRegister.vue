@@ -68,6 +68,7 @@ export default {
         })
         .then((response) => {
           cookies.set("user", response.data);
+          this.$router.push('/feed');
           response;
         })
         .catch((error) => {

@@ -3,15 +3,20 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "PageFeed",
 
   methods: {
     get_tweets() {
       axios
-        .request({})
+        .request({
+            url: "https://tweeterest.ga/api/tweets",
+            method: 'GET',
+        })
         .then((response) => {
-          response;
+            response.data
         })
         .catch((error) => {
           error;

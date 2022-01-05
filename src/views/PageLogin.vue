@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import cookies from "vue-cookies";
 axios.defaults.headers.common['X-Api-Key'] = 'G3QsyNUo9GBausjYx7y7RVO0ByWvoBcpmNxHmeaNjs2NN'
 
 export default {
@@ -32,6 +33,8 @@ export default {
                 "password": this.$refs['password'].value 
             }
       }).then((response) =>{
+          cookies.set("user", response.data);
+          this.$router.push('/feed');
           response
       }).catch((error) =>{
           error
