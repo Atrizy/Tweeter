@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import PageLogin from '@/views/PageLogin.vue'
 import PageRegister from '@/views/PageRegister.vue'
 import PageFeed from '@/views/PageFeed.vue'
+import PageProfile from '@/views/PageProfile.vue' 
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/feed',
     name: 'PageFeed',
     component: PageFeed
+  },
+  {
+    path: '/profile',
+    name: 'PageProfile',
+    component: PageProfile
   }
 ];
 
