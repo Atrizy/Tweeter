@@ -17,11 +17,12 @@
     </div>
     <div class="tweets" v-for="tweet in tweets" :key="tweet['tweetId']">
       <img :src="tweet.userImageUrl" alt="userpfp" class="pfp" />
+      <delete-tweet :tweetId="tweet.tweetId"></delete-tweet>
       <h5 @click="go_to_profile(tweet.userId)">{{ tweet.username }}</h5>
       <p>{{ tweet.content }}</p>
       <h6>{{ tweet.createdAt }}</h6>
-      <page-post-comments></page-post-comments>
-      <page-comments></page-comments>
+      <page-post-comments :tweetId="tweet.tweetId"></page-post-comments>
+      <page-comments :tweetId="tweet.tweetId"></page-comments>
     </div>
   </div>
 </template>
@@ -31,16 +32,18 @@ import axios from "axios";
 import cookies from "vue-cookies";
 axios.defaults.headers.common["X-Api-Key"] =
   "G3QsyNUo9GBausjYx7y7RVO0ByWvoBcpmNxHmeaNjs2NN";
-import PageComments from '@/components/PageComments.vue';
-import PagePostComments from '@/components/PagePostComments.vue';
+import PageComments from "@/components/PageComments.vue";
+import PagePostComments from "@/components/PagePostComments.vue";
+import DeleteTweet from "@/components/DeleteTweet.vue";
 
 export default {
   name: "PageFeed",
 
-components: {
-  PageComments,
-  PagePostComments
-},
+  components: {
+    PageComments,
+    PagePostComments,
+    DeleteTweet,
+  },
 
   methods: {
     go_to_profile(userId) {

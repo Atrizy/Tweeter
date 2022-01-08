@@ -1,33 +1,27 @@
 <template>
   <div>
-    <input
-      type="text"
-      name="comment"
-      placeholder="Enter comment here..."
-      ref="comment"
-    />
-    <button @click="post_comment">Post comment</button>
+      <button @click="delete_tweet">Delete Tweet</button>
   </div>
 </template>
 
 <script>
-import cookies from "vue-cookies";
 import axios from "axios";
 axios.defaults.headers.common["X-Api-Key"] =
   "G3QsyNUo9GBausjYx7y7RVO0ByWvoBcpmNxHmeaNjs2NN";
+import cookies from "vue-cookies";
+
 export default {
-  name: "page-post-comments",
+  name: "delete-tweet",
 
   methods: {
-    post_comment() {
+    delete_tweet() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/comments",
-          method: "POST",
+          url: "https://tweeterest.ga/api/tweets",
+          method: "DELETE",
           data: {
             loginToken: cookies.get("user").loginToken,
             tweetId: this.tweetId,
-            content: this.$refs["comment"].value,
           },
         })
         .then((response) => {
@@ -37,11 +31,6 @@ export default {
           error;
         });
     },
-  },
-  data() {
-    return {
-      comments: [],
-    };
   },
   props: {
     tweetId: Number,
