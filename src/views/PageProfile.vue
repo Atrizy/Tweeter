@@ -1,5 +1,6 @@
 <template>
   <div>
+    <edit-profile v-if="can_edit"></edit-profile>
     <div
       class="user_profile"
       v-for="user in users"
@@ -19,20 +20,29 @@
 
 <script>
 import axios from "axios";
+import cookies from "vue-cookies";
+import EditProfile from "@/components/EditProfile.vue";
 axios.defaults.headers.common["X-Api-Key"] =
   "G3QsyNUo9GBausjYx7y7RVO0ByWvoBcpmNxHmeaNjs2NN";
 
 export default {
+  components: {
+    EditProfile,
+  },
   name: "PageProfile",
 
   methods: {
     get_profile_info() {
+      if (!this.$route.query.userId) {
+        this.$route.query.userId = cookies.get("user").userId;
+      }
+
       axios
         .request({
           url: "https://tweeterest.ga/api/users",
           method: "GET",
           params: {
-            userId: this.$route.query.userId
+            userId: this.$route.query.userId,
           },
         })
         .then((response) => {
@@ -46,6 +56,7 @@ export default {
   data() {
     return {
       users: [],
+      can_edit: (this.$route.query.userId == cookies.get("user").userId || !this.$route.query.userId),
     };
   },
 };
