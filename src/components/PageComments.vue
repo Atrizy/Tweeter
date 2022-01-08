@@ -1,6 +1,14 @@
 <template>
   <div>
-      <button @click="get_comments">Get comments</button>
+    <div
+      class="comments"
+      v-for="comment in comments"
+      :key="comment['commentId']">
+          <h5> {{ comment.username }} </h5>
+          <p> {{ comment.content }} </p>
+          <h6> {{ comment.createdAt }} </h6>     
+      </div>
+    <button @click="get_comments">Get comments</button>
   </div>
 </template>
 
@@ -17,13 +25,15 @@ export default {
         .request({
           url: "https://tweeterest.ga/api/comments",
           method: "GET",
-          data: {},
+          params: {
+            tweetId: this.tweetId,
+          },
         })
         .then((response) => {
-            response.data
+          this.comments = response.data;
         })
         .catch((error) => {
-            error
+          error;
         });
     },
   },
