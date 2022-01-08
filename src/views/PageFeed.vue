@@ -34,11 +34,10 @@ export default {
   name: "PageFeed",
 
   methods: {
-
     go_to_profile(userId) {
       this.$router.push({
         path: "/profile",
-        query: {id: userId}
+        query: { userId: userId },
       });
     },
 
