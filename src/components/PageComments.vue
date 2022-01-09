@@ -7,7 +7,8 @@
           <h5> {{ comment.username }} </h5>
           <p> {{ comment.content }} </p>
           <delete-comment :commentId="comment.commentId"></delete-comment>
-          <h6> {{ comment.createdAt }} </h6>     
+          <h6> {{ comment.createdAt }} </h6>
+          <edit-comment :commentId="comment.content"></edit-comment>  
       </div>
     <button @click="get_comments">Get comments</button>
   </div>
@@ -16,6 +17,7 @@
 <script>
 import axios from "axios";
 import DeleteComment from './DeleteComment.vue';
+import EditComment from './EditComment.vue';
 axios.defaults.headers.common["X-Api-Key"] =
   "G3QsyNUo9GBausjYx7y7RVO0ByWvoBcpmNxHmeaNjs2NN";
 export default {
@@ -23,6 +25,7 @@ export default {
 
     components: {
         DeleteComment,
+        EditComment,
     },
 
   methods: {

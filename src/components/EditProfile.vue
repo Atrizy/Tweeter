@@ -43,7 +43,7 @@ export default {
           url: "https://tweeterest.ga/api/users",
           method: "PATCH",
           data: {
-            loginToken: cookies.get('user').loginToken,
+            loginToken: cookies.get("user").loginToken,
             email: this.$refs["email"].value,
             username: this.$refs["username"].value,
             bio: this.$refs["bio"].value,
