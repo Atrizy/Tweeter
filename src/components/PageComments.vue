@@ -8,7 +8,7 @@
           <p> {{ comment.content }} </p>
           <delete-comment :commentId="comment.commentId"></delete-comment>
           <h6> {{ comment.createdAt }} </h6>
-          <edit-comment :commentId="comment.content"></edit-comment>  
+          <edit-comment :commentId="comment.commentId"></edit-comment>  
       </div>
     <button @click="get_comments">Get comments</button>
   </div>

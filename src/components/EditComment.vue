@@ -39,6 +39,10 @@ export default {
         });
     },
   },
+
+  props: {
+    commentId: Number
+  },
 };
 </script>
 

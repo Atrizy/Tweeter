@@ -1,6 +1,7 @@
 <template>
   <div>
     <edit-profile v-if="can_edit"></edit-profile>
+    <delete-profile v-if="can_edit"></delete-profile>
     <div
       class="user_profile"
       v-for="user in users"
@@ -22,12 +23,14 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 import EditProfile from "@/components/EditProfile.vue";
+import DeleteProfile from '@/components/DeleteProfile.vue';
 axios.defaults.headers.common["X-Api-Key"] =
   "G3QsyNUo9GBausjYx7y7RVO0ByWvoBcpmNxHmeaNjs2NN";
 
 export default {
   components: {
     EditProfile,
+    DeleteProfile,
   },
   name: "PageProfile",
 

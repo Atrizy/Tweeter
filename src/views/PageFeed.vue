@@ -13,7 +13,7 @@
       <button @click="submit_tweet">Submit Tweet!</button>
     </div>
     <div class="load_tweets">
-      <button @click="get_tweets">Load Tweets</button>
+      <button @click="get_tweets">Reload Tweets</button>
     </div>
     <div class="tweets" v-for="tweet in tweets" :key="tweet['tweetId']">
       <img :src="tweet.userImageUrl" alt="userpfp" class="pfp" />
@@ -21,6 +21,7 @@
       <h5 @click="go_to_profile(tweet.userId)">{{ tweet.username }}</h5>
       <p>{{ tweet.content }}</p>
       <h6>{{ tweet.createdAt }}</h6>
+      <page-likes :tweetId="tweet.tweetId"></page-likes>
       <page-post-comments :tweetId="tweet.tweetId"></page-post-comments>
       <page-comments :tweetId="tweet.tweetId"></page-comments>
     </div>
@@ -35,6 +36,7 @@ axios.defaults.headers.common["X-Api-Key"] =
 import PageComments from "@/components/PageComments.vue";
 import PagePostComments from "@/components/PagePostComments.vue";
 import DeleteTweet from "@/components/DeleteTweet.vue";
+import PageLikes from "@/components/PageLikes.vue";
 
 export default {
   name: "PageFeed",
@@ -43,6 +45,7 @@ export default {
     PageComments,
     PagePostComments,
     DeleteTweet,
+    PageLikes,
   },
 
   methods: {
@@ -90,6 +93,12 @@ export default {
     return {
       tweets: [],
     };
+  },
+
+  mounted() {
+    axios
+      .get("https://tweeterest.ga/api/tweets")
+      .then((response) => (this.tweets = response.data));
   },
 };
 </script>
